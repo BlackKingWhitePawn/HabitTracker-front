@@ -48,7 +48,7 @@ function VideoForm() {
       // formData.append('currentChunk', file);
 
       try {
-        await axios.post('/upload-video', formData, {
+        await axios.post(`${API}/upload-video`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
