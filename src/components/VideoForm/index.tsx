@@ -23,7 +23,7 @@ function VideoForm() {
     if (!file) {
       return
     }
-    const CHUNK_SIZE = 1024000; // Размер чанка (в байтах)
+    const CHUNK_SIZE = 102400; // Размер чанка (в байтах)
 
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
     console.log('total chunks ' + totalChunks);
@@ -39,7 +39,7 @@ function VideoForm() {
       formData.append('video_id', '-1')
       formData.append('chunk', chunk);
       formData.append('chunk_id', `${currentChunk}`)
-      if (currentChunk = totalChunks - 1) {
+      if (currentChunk == totalChunks - 1) {
         formData.append('complete', 'true')
       } else {
         formData.append('complete', 'false')
@@ -54,11 +54,16 @@ function VideoForm() {
           },
         });
 
-        currentChunk++;
+        console.log(currentChunk);
       } catch (error) {
         console.error('Error uploading chunk:', error);
         // Обработка ошибки при загрузке чанка
       }
+
+      // TODO: ставить счетчики для запросов
+      currentChunk++;
+      console.log(currentChunk);
+
     }
 
     // Все чанки загружены
