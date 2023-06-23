@@ -4,17 +4,30 @@ import { API } from "utils/config";
 import { } from "@mui/material/Tooltip";
 
 function VideoForm() {
-  const [file, setfile] = useState<any>(null)
+  const [file, setfile] = useState<Blob | null>(null)
 
   function handleFileChange(event: any) {
     const videoFile = event.target.files[0]
-    setfile(videoFile)
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        const blob = new Blob([reader.result], { type: videoFile.type });
+        setfile(blob)
+      }
+    }
+    reader.readAsArrayBuffer(videoFile);
   }
 
   async function handleSubmit(event: any) {
-    const CHUNK_SIZE = 5242880; // Размер чанка (в байтах) - здесь установлено 5 МБ
+    event.preventDefault();
+    if (!file) {
+      return
+    }
+    const CHUNK_SIZE = 1024000; // Размер чанка (в байтах)
 
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+    console.log('total chunks ' + totalChunks);
+
     let currentChunk = 0;
 
     while (currentChunk < totalChunks) {
