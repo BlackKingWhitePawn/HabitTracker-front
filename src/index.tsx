@@ -6,6 +6,7 @@ import StartPage from 'pages/start';
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Layout from 'components/Layout';
 import ProfilePage from 'pages/Profile';
+import VideoPage from 'pages/Video';
 
 
 const root = ReactDOM.createRoot(
@@ -30,7 +31,7 @@ function App() {
         <Route path='/' element={<Wrapper />} >
           <Route index element={<StartPage />} />
           <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/videos' element={<StartPage />} />
+          <Route path='/videos' element={<VideoPage />} />
           <Route path='/analysis' element={<StartPage />} />
           <Route path="*" element={<Layout children={<></>} />} />
         </Route>
