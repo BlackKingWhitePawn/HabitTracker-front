@@ -1,0 +1,10 @@
+.video-form {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__submit {
+        margin-top: 16px;
+    }
+}

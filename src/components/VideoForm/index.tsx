@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { API } from "utils/config";
-import { } from "@mui/material/Tooltip";
+import { Input, Button } from "@mui/material";
 import { generateGUID, getCookie, setCookie } from "utils/cookie";
+import "./style.scss";
 
 function VideoForm() {
   const [file, setfile] = useState<Blob | null>(null)
@@ -87,9 +88,11 @@ function VideoForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" onChange={handleFileChange} />
-      <button type="submit">Загрузить видео</button>
+    <form className="video-form" onSubmit={handleSubmit}>
+      <Input type="file" onChange={handleFileChange} />
+      <div className="video-form__submit">
+        <Button className="video-form__submit" type="submit" variant="outlined" >Загрузить видео</Button>
+      </div>
     </form>
   );
 }
