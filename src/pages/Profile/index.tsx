@@ -1,9 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material'
+import { Avatar, Box, Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material'
 import Layout from 'components/Layout'
 import VideoForm from 'components/VideoForm'
 import React, { useEffect } from 'react'
 import "./style.scss";
 import { getCookie } from 'utils/cookie';
+import { deepOrange } from '@mui/material/colors';
 
 const bull = (
   <Box
@@ -22,10 +23,13 @@ function ProfilePage() {
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Информация о профиле
           </Typography>
-          <Typography variant="h5" component="div">
-            Имя Пользователя
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          <div style={{ display: 'flex', marginTop: '8px' }}>
+            <Avatar style={{ marginRight: '8px' }} sx={{ bgcolor: deepOrange[500] }}>ИП</Avatar>
+            <Typography variant="h5" sx={{ mt: 0.5 }} component="div">
+              Имя Пользователя
+            </Typography>
+          </div>
+          <Typography sx={{ mb: 1.5, mt: 1.5 }} color="text.secondary">
             <i>GUID: {getCookie('clientId')}</i>
           </Typography>
           <Typography variant="body2">
