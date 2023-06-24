@@ -7,6 +7,7 @@ import { generateGUID, getCookie, setCookie } from "utils/cookie";
 function VideoForm() {
   const [file, setfile] = useState<Blob | null>(null)
   const [clientId, setclientId] = useState('')
+  const [videoId, setvideoId] = useState('')
 
   useEffect(() => {
     let clientId = getCookie('clientId')
@@ -29,6 +30,7 @@ function VideoForm() {
       }
     }
     reader.readAsArrayBuffer(videoFile);
+    setvideoId(generateGUID())
   }
 
   async function handleSubmit(event: any) {
@@ -49,7 +51,7 @@ function VideoForm() {
       const chunk = file.slice(start, end);
 
       const formData = new FormData();
-      formData.append('video_id', '-1')
+      formData.append('video_id', videoId)
       formData.append('chunk', chunk);
       formData.append('chunk_id', `${currentChunk}`)
       formData.append('client_id', clientId)
