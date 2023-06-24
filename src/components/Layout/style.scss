@@ -1,3 +1,25 @@
 .layout-page {
     
 }
+
+.header {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+
+    &__toolbar {
+        width: min-content;
+    }
+
+    &__link {
+        display: flex;
+        justify-content: space-around;
+        padding: 16px;
+    }
+
+    &__logo {
+        width: min-content;
+    }
+}

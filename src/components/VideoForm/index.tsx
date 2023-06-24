@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API } from "utils/config";
 import { Input, Button } from "@mui/material";
 import { generateGUID, getCookie, setCookie } from "utils/cookie";
@@ -7,6 +7,19 @@ import "./style.scss";
 
 function VideoForm() {
   const [file, setfile] = useState<Blob | null>(null)
+  const [clientId, setclientId] = useState('')
+  const [videoId, setvideoId] = useState('')
+
+  useEffect(() => {
+    let clientId = getCookie('clientId')
+
+    if (!clientId) {
+      clientId = generateGUID()
+      setCookie('clientId', generateGUID(), 7)
+    }
+
+    setclientId(clientId)
+  }, [])
 
   function handleFileChange(event: any) {
     const videoFile = event.target.files[0]
@@ -38,8 +51,8 @@ function VideoForm() {
       const chunk = file.slice(start, end);
 
       const formData = new FormData();
-      formData.append('video_id', '697112b8-fb2e-4260-a2e1-7d9473c89606')
-      formData.append('client_id', '697112b8-fb2e-4260-a2e1-7d9473c8911')
+      formData.append('video_id', videoId)
+      formData.append('client_id', clientId)
       formData.append('chunk', chunk);
       formData.append('chunk_id', `${currentChunk}`)
       if (currentChunk == totalChunks - 1) {

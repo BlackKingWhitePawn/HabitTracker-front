@@ -10,6 +10,7 @@ const getCookie = (name: string) => {
     const field = cookie
       .split(';')
       .find(c => c.split('=')[0] == name)
+      ?.split('=')[1]
 
     return field
 }

@@ -12,10 +12,19 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
     return (
         <div className={`${className}`}>
             <AppBar className={`header`} position='sticky'>
-                <Toolbar>
+                <div className="header__logo">
+                    logo
+                </div>
+                <Toolbar className='header__toolbar'>
                     {/* <img className='header__logo' src='/assets/logo.svg' alt='logo' width={44} /> */}
-                    <Typography className='header__link' variant="h6" component="a" href='/' sx={{ flexGrow: 1 }}>
+                    <Typography className='header__link' variant="h6" component="a" href='/analysis' sx={{ flexGrow: 1 }}>
                         Аналитика
+                    </Typography>
+                    <Typography className='header__link' variant="h6" component="a" href='/profile' sx={{ flexGrow: 1 }}>
+                        Профиль
+                    </Typography>
+                    <Typography className='header__link' variant="h6" component="a" href='/videos' sx={{ flexGrow: 1 }}>
+                        Файлы
                     </Typography>
                 </Toolbar>
             </AppBar>
