@@ -1,5 +1,6 @@
 import VideoForm from 'components/VideoForm'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { generateGUID, getCookie, setCookie } from 'utils/cookie'
 
 function StartPage() {
   return (
