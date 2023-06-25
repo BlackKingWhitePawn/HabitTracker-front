@@ -9,4 +9,11 @@
         height: 100%;
         padding-top: 200px;
     }
+
+    &__list {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

@@ -9,9 +9,10 @@ const getCookie = (name: string) => {
     const cookie = document.cookie
     const field = cookie
       .split(';')
-      .find(c => c.split('=')[0] == name)
+      .find(c => c.trim().split('=')[0] == name)
       ?.split('=')[1]
 
+    
     return field
 }
 

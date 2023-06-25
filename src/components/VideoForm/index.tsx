@@ -9,6 +9,7 @@ function VideoForm() {
   const [file, setfile] = useState<Blob | null>(null)
   const [clientId, setclientId] = useState('')
   const [videoId, setvideoId] = useState('')
+  const [fileName, setfileName] = useState('')
 
   useEffect(() => {
     let clientId = getCookie('clientId')
@@ -27,7 +28,9 @@ function VideoForm() {
     reader.onload = () => {
       if (reader.result) {
         const blob = new Blob([reader.result], { type: videoFile.type });
+        setvideoId(generateGUID())
         setfile(blob)
+        setfileName(videoFile.name)
       }
     }
     reader.readAsArrayBuffer(videoFile);
@@ -38,6 +41,16 @@ function VideoForm() {
     if (!file) {
       return
     }
+
+    const videos = getCookie('videos')
+    console.log(videos);
+
+    if (!videos) {
+      setCookie('videos', `${videoId}:${fileName}`, 1000)
+    } else {
+      setCookie('videos', `${videos},${videoId}:${fileName}`, 1000)
+    }
+
     const CHUNK_SIZE = 102400; // Размер чанка (в байтах)
 
     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
@@ -49,7 +62,6 @@ function VideoForm() {
       const start = currentChunk * CHUNK_SIZE;
       const end = Math.min(start + CHUNK_SIZE, file.size);
       const chunk = file.slice(start, end);
-
       const formData = new FormData();
       formData.append('video_id', videoId)
       formData.append('client_id', clientId)
@@ -60,8 +72,6 @@ function VideoForm() {
       } else {
         formData.append('complete', 'false')
       }
-      // formData.append('totalChunks', totalChunks);
-      // formData.append('currentChunk', file);
 
       try {
         await axios.post(`${API}/upload-video`, formData, {
@@ -79,7 +89,6 @@ function VideoForm() {
       // TODO: ставить счетчики для запросов
       currentChunk++;
       console.log(currentChunk);
-
     }
 
     // Все чанки загружены

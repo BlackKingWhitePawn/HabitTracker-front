@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children, className }) => {
                 </div>
                 <Toolbar className='header__toolbar'>
                     {/* <img className='header__logo' src='/assets/logo.svg' alt='logo' width={44} /> */}
-                    <Typography className='header__link' variant="h6" component="a" href='/analysis' sx={{ flexGrow: 1 }}>
+                    <Typography className='header__link' variant="h6" component="a" href='http://grafana.qwjw.ru' sx={{ flexGrow: 1 }}>
                         Аналитика
                     </Typography>
                     <Typography className='header__link' variant="h6" component="a" href='/profile' sx={{ flexGrow: 1 }}>
