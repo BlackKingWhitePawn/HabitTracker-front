@@ -1,3 +1,3 @@
-const API = 'http://backend:8080/'
+const API = 'http://backend:8080'
 
 export {API}
