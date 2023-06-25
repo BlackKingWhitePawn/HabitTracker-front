@@ -1,3 +1,3 @@
-const API = 'https://backend.qwjw.ru'
+const API = 'http://backend:8080/'
 
 export {API}
